@@ -1,0 +1,19 @@
+# Credenciais e configuração local
+.env
+.env.*
+!.env.example
+
+# Dependências e artefatos comuns
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+dist/
+build/
+coverage/
+
+# Arquivos do sistema e editores
+.DS_Store
+Thumbs.db
+.vscode/
