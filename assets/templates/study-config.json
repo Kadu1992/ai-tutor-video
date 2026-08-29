@@ -1,0 +1,17 @@
+{
+  "schema_version": 2,
+  "study_id": "",
+  "topic": "",
+  "goal": "",
+  "deadline": null,
+  "weekly_hours": 0,
+  "preferred_times": [],
+  "initial_level": "",
+  "language": "pt-BR",
+  "accessibility": [],
+  "source_policy": {
+    "prefer_primary": true,
+    "prefer_pt_br": true
+  },
+  "external_consents": {}
+}
