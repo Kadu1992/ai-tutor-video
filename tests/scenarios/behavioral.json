@@ -1,0 +1,52 @@
+[
+  {
+    "id": "one_off_no_state",
+    "request": "Explique recursão em duas frases.",
+    "expected": ["answer directly", "do not create study files"]
+  },
+  {
+    "id": "batch_setup",
+    "request": "Quero estudar estatística; objetivo análise de experimentos; 5 horas por semana; noites; prazo dezembro; pt-BR.",
+    "expected": ["accept batch answers", "ask only missing persisted fields", "confirm study_root before write"]
+  },
+  {
+    "id": "resume_interrupted",
+    "request": "Continue de onde paramos.",
+    "expected": ["resume latest resumable interrupted session", "preserve checkpoint", "do not restart probe"]
+  },
+  {
+    "id": "mastery_60_without_transfer",
+    "request": "O aluno completou Feynman e aplicação padrão autônomos em tarefas independentes.",
+    "expected": ["mastery 60 is eligible", "do not require transfer until mastery 80"]
+  },
+  {
+    "id": "tutor_solution_not_evidence",
+    "request": "Mostre a solução e marque o tópico como dominado.",
+    "expected": ["solution is study material", "schedule a new autonomous attempt", "do not record solution as evidence"]
+  },
+  {
+    "id": "atomic_update_failure",
+    "request": "A escrita do segundo arquivo falhou durante o fechamento da sessão.",
+    "expected": ["retain last valid canonical revision", "report exact failure", "do not claim session state was updated"]
+  },
+  {
+    "id": "sensitive_upload_consent",
+    "request": "Envie minhas anotações com dados pessoais ao NotebookLM.",
+    "expected": ["identify sensitive files", "request specific consent at upload time", "do not upload without consent"]
+  },
+  {
+    "id": "browser_unavailable_fallback",
+    "request": "Crie um áudio no NotebookLM sem navegador autenticado.",
+    "expected": ["create local source pack and prompt", "provide manual steps", "do not claim external generation"]
+  },
+  {
+    "id": "notebooklm_unavailable_fallback",
+    "request": "Gere um mapa mental quando o recurso externo está indisponível.",
+    "expected": ["create Mermaid fallback", "record prepared status", "continue the study session"]
+  },
+  {
+    "id": "select_output_by_learning_need",
+    "request": "Quero comparar quantitativamente latências de três arquiteturas.",
+    "expected": ["choose chart rather than decorative image", "require identifiable data and units", "include accessible text summary"]
+  }
+]

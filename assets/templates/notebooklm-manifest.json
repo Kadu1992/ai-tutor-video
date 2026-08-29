@@ -1,0 +1,18 @@
+{
+  "schema_version": 2,
+  "artifact_id": "",
+  "lesson_id": "",
+  "objective": "",
+  "source_ids": [],
+  "source_hashes": {},
+  "requested_formats": [],
+  "external_upload": {
+    "provider": "notebooklm",
+    "consented": false,
+    "consented_at": null,
+    "files": []
+  },
+  "evidence_eligible": false,
+  "status": "prepared",
+  "outputs": []
+}
