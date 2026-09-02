@@ -42,10 +42,11 @@
 - [x] Tornar a suíte executável pelo `unittest discover` padrão.
 - [x] Configurar validação em Ubuntu, Windows e macOS com Python suportado.
 - [x] Configurar validação de tags de release e criação de GitHub Release apenas após os testes.
+- [x] Corrigir a expectativa do teste para comparar caminhos canônicos em Windows e macOS.
 
 ### Task 3: Gate final e publicação
 
 - [x] Executar testes completos, validadores e compilação.
 - [x] Fazer auditoria de segredos/caminhos pessoais e revisar diff.
-- [ ] Commitar e enviar para `origin/main`.
-- [ ] Confirmar o commit e os workflows no GitHub.
+- [x] Commitar e enviar para `origin/main`.
+- [x] Confirmar o commit e os workflows no GitHub.

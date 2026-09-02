@@ -25,7 +25,7 @@ class InitializeStudyTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             study = Path(tmp) / "meu estudo"
             created = initialize_study(ROOT, study, VALID_CONFIG)
-            self.assertIn(study / ".ai-tutor" / "state.json", created)
+            self.assertIn((study / ".ai-tutor" / "state.json").resolve(), created)
             state = json.loads((study / ".ai-tutor" / "state.json").read_text(encoding="utf-8"))
             self.assertEqual(2, state["schema_version"])
             self.assertEqual([], state["topics"])
