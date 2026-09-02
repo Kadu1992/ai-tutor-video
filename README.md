@@ -67,7 +67,7 @@ O tutor avalia ideia central, contexto, justificativa observável, limites relev
 ### Pré-requisitos
 
 - Python 3.11 ou superior.
-- Git para contribuir com o código-fonte.
+- Git para obter o repositório localmente.
 - Um ambiente de chat/agente que carregue a skill `ai-tutor`.
 
 ### Inicializar um estudo
@@ -109,10 +109,7 @@ ai-tutor-skill/
 ├── scripts/                         # inicialização, validação e migração
 ├── tests/                           # testes determinísticos e cenários
 ├── docs/superpowers/specs/          # decisões arquiteturais
-├── README.md                        # esta documentação
-├── CONTRIBUTING.md                  # fluxo de contribuição
-├── CHANGELOG.md                     # histórico de mudanças
-└── VERSION                          # versão SemVer do projeto
+└── README.md                        # esta documentação
 ```
 
 ## Segurança e limites
@@ -123,24 +120,6 @@ ai-tutor-skill/
 - Links públicos e compartilhamento são ações separadas da geração de material.
 - Artefatos externos devem ser revisados antes de entrar no material de estudo.
 - O AI Tutor organiza aprendizagem; não certifica competência profissional nem substitui revisão especializada.
-
-## Contribuição e melhoria contínua
-
-Leia [CONTRIBUTING.md](CONTRIBUTING.md) antes de abrir uma alteração. Em resumo:
-
-1. Abra uma issue ou descreva claramente o problema.
-2. Crie uma branch pequena e focada.
-3. Atualize contrato, workflow, teste ou documentação no local correto.
-4. Execute a suíte de testes e os validadores.
-5. Abra um pull request com evidências e impacto.
-
-Mudanças de comportamento devem incluir um cenário em `tests/scenarios/behavioral.json` quando aplicável. A melhoria contínua deve preservar os limites pedagógicos e de segurança já definidos, em vez de acumular regras específicas para um único exemplo.
-
-## Versionamento e releases
-
-O projeto segue [Semantic Versioning](https://semver.org/). A versão atual está em [VERSION](VERSION), e o histórico fica em [CHANGELOG.md](CHANGELOG.md). O workflow de release valida a tag `vX.Y.Z` contra `VERSION` e só cria a GitHub Release depois de executar os testes.
-
-O procedimento detalhado está em [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Status
 
