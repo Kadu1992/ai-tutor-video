@@ -1,0 +1,45 @@
+name: Validate AI Tutor
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    name: Python ${{ matrix.python }} on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            python: '3.11'
+          - os: ubuntu-latest
+            python: '3.12'
+          - os: windows-latest
+            python: '3.11'
+          - os: macos-latest
+            python: '3.11'
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+
+      - name: Run tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+
+      - name: Validate skill package
+        run: python scripts/validate_skill.py .
+
+      - name: Compile Python sources
+        run: python -m compileall -q scripts tests

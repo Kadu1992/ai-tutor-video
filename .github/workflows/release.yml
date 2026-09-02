@@ -1,0 +1,46 @@
+name: Release AI Tutor
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    name: Validate release tag
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+
+      - name: Validate skill package
+        run: python scripts/validate_skill.py .
+
+      - name: Verify version metadata
+        shell: bash
+        run: |
+          expected="${GITHUB_REF_NAME#v}"
+          actual="$(tr -d '[:space:]' < VERSION)"
+          grep -Fq "## [$expected]" CHANGELOG.md
+          test "$expected" = "$actual"
+
+  publish:
+    name: Create GitHub Release
+    needs: validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create release from tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create "$GITHUB_REF_NAME" --title "$GITHUB_REF_NAME" --generate-notes
