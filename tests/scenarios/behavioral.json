@@ -48,5 +48,15 @@
     "id": "select_output_by_learning_need",
     "request": "Quero comparar quantitativamente latências de três arquiteturas.",
     "expected": ["choose chart rather than decorative image", "require identifiable data and units", "include accessible text summary"]
+  },
+  {
+    "id": "literal_response_assessment",
+    "request": "O aluno descreve a capacidade de Work/Cowork para transformar um arquivo anexado, mas não afirma que possui acesso irrestrito ou autorização prévia.",
+    "expected": ["recognize the explicit core idea", "do not infer unrestricted access or missing authorization", "offer a permission caveat as optional refinement unless required"]
+  },
+  {
+    "id": "response_feedback_and_omission",
+    "request": "O aluno escolhe o ambiente adequado, justifica a decisão e, após feedback, corrige uma imprecisão; uma cautela opcional não foi mencionada.",
+    "expected": ["classify the core response as correct when no material error exists", "separate optional omission from material error", "recognize autonomous correction as possible evidence when the help level permits"]
   }
 ]

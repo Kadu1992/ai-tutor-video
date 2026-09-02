@@ -14,6 +14,20 @@ class ValidateSkillTests(unittest.TestCase):
     def test_repository_matches_v2_contract(self):
         self.assertEqual([], validate_skill(ROOT))
 
+    def test_learning_contract_defines_literal_response_assessment(self):
+        contract = (ROOT / "references" / "learning-contract.md").read_text(encoding="utf-8").lower()
+        required_clauses = [
+            "ideia central",
+            "contexto",
+            "justificativa",
+            "limites, condições e riscos",
+            "omissão opcional",
+            "não inferir afirmações não feitas",
+            "autocorreção após feedback",
+        ]
+        for clause in required_clauses:
+            self.assertIn(clause, contract)
+
     def test_rejects_nested_discoverable_skills(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp) / "package"
@@ -69,6 +83,8 @@ class ValidateSkillTests(unittest.TestCase):
             "browser_unavailable_fallback",
             "notebooklm_unavailable_fallback",
             "select_output_by_learning_need",
+            "literal_response_assessment",
+            "response_feedback_and_omission",
         }, identifiers)
 
 

@@ -17,6 +17,27 @@ An evidence is independent when it tests a different behavior or uses a substant
 
 Tutor-provided answers, copied solutions, generated cards, diagrams, images, audio, video, or other media are not evidence. A later autonomous attempt may be evidence.
 
+## Resposta correta e avaliação literal
+
+Uma resposta não precisa usar palavras exatas nem mencionar toda cautela possível para ser considerada correta. O tutor deve avaliar o conteúdo observável, preservar a intenção do aluno e não transformar uma preferência de redação em requisito de domínio.
+
+Antes de classificar uma resposta, verifique:
+
+1. **Ideia central** — o aluno identificou o conceito, ambiente ou decisão principal?
+2. **Contexto** — aplicou essa ideia ao problema e ao ambiente corretos?
+3. **Justificativa** — explicou a decisão com uma justificativa resumida e verificável? Não exija cadeia de pensamento privada.
+4. **Limites, condições e riscos** — há algum limite relevante para o objetivo? Se foi omitido, apresente-o ou ajude o aluno a identificá-lo. A omissão opcional não é erro nem resposta parcial, a menos que o objetivo tenha tornado esse ponto requisito explícito.
+5. **Autocorreção após feedback** — o aluno corrigiu ou melhorou a resposta depois de receber feedback? Registre a melhoria; uma nova tentativa autônoma pode ser evidência conforme o nível de ajuda utilizado.
+6. **Leitura literal** — não inferir afirmações não feitas, como autorização, acesso irrestrito, ausência de revisão humana ou suporte universal a formatos. Registre somente o que o texto sustenta e sinalize inferências como hipóteses.
+
+Use estas classificações:
+
+- **Correta:** ideia central, contexto e justificativa são materialmente adequados, sem contradição relevante.
+- **Parcial:** a direção geral está certa, mas falta um elemento material que impede cumprir o objetivo com segurança ou confiabilidade.
+- **Incorreta:** a ideia central ou o contexto estão errados, há contradição relevante ou a resposta sustenta uma ação insegura.
+
+Uma melhoria opcional pode ser recomendada sem rebaixar a classificação. A avaliação continua subordinada à matriz de domínio acima: uma resposta correta isolada não cria evidência independente nem altera os requisitos de 60, 80 ou 100.
+
 ## Help ladder
 
 1. Rephrase the task.
