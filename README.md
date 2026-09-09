@@ -53,9 +53,26 @@ python3 --version
 
 ---
 
-2. Instale o AI Tutor
+2. Instale o AI Tutor Video
 
-Escolha abaixo o ambiente que você utiliza.
+### ⚡ Instalação Rápida Universal (Recomendado para qualquer ambiente)
+
+Se você utiliza **Codex, Claude Code, Cursor, OpenCode ou Antigravity IDE**, pode instalar diretamente com um único comando no terminal:
+
+```bash
+npx skills add Kadu1992/ai-tutor-video
+```
+
+Ou a partir do nosso catálogo central [Kadu Skills Hub](https://github.com/Kadu1992/kadu-skills-hub):
+```bash
+npx skills add Kadu1992/kadu-skills-hub --skill ai-tutor-video
+```
+
+---
+
+### 🛠️ Instalação Manual por Ambiente (Git Clone)
+
+Caso prefira clonar manualmente no diretório de skills do seu editor favorito, escolha abaixo o ambiente que você utiliza.
 
 ---
 
@@ -67,7 +84,7 @@ Abra o terminal e execute:
 
 mkdir -p ~/.codex/skills
 
-git clone https://github.com/14lucas-mendes/ai-tutor-skill \
+git clone https://github.com/Kadu1992/ai-tutor-video \
   ~/.codex/skills/ai-tutor
 
 Depois reinicie o Codex.
@@ -90,7 +107,7 @@ Execute:
 
 New-Item -ItemType Directory -Force "$HOME\.codex\skills"
 
-git clone https://github.com/14lucas-mendes/ai-tutor-skill `
+git clone https://github.com/Kadu1992/ai-tutor-video `
   "$HOME\.codex\skills\ai-tutor"
 
 Depois reinicie o Codex.
@@ -109,7 +126,7 @@ Execute:
 
 mkdir -p ~/.claude/skills
 
-git clone https://github.com/14lucas-mendes/ai-tutor-skill \
+git clone https://github.com/Kadu1992/ai-tutor-video \
   ~/.claude/skills/ai-tutor
 
 Depois abra ou reinicie o Claude Code.
@@ -134,7 +151,7 @@ Execute:
 
 New-Item -ItemType Directory -Force "$HOME\.claude\skills"
 
-git clone https://github.com/14lucas-mendes/ai-tutor-skill `
+git clone https://github.com/Kadu1992/ai-tutor-video `
   "$HOME\.claude\skills\ai-tutor"
 
 Depois abra novamente o Claude Code.
@@ -157,7 +174,7 @@ No Cursor:
 4. Escolha Remote Rule (GitHub).
 5. Informe o repositório:
 
-https://github.com/14lucas-mendes/ai-tutor-skill
+https://github.com/Kadu1992/ai-tutor-video
 
 Depois verifique a área Customize → Skills para confirmar que a skill foi reconhecida.
 
@@ -169,14 +186,14 @@ No macOS ou Linux:
 
 mkdir -p ~/.cursor/skills
 
-git clone https://github.com/14lucas-mendes/ai-tutor-skill \
+git clone https://github.com/Kadu1992/ai-tutor-video \
   ~/.cursor/skills/ai-tutor
 
 No Windows PowerShell:
 
 New-Item -ItemType Directory -Force "$HOME\.cursor\skills"
 
-git clone https://github.com/14lucas-mendes/ai-tutor-skill `
+git clone https://github.com/Kadu1992/ai-tutor-video `
   "$HOME\.cursor\skills\ai-tutor"
 
 Depois reinicie o Cursor.
@@ -211,7 +228,7 @@ Execute:
 
 mkdir -p ~/.config/opencode/skills
 
-git clone https://github.com/14lucas-mendes/ai-tutor-skill \
+git clone https://github.com/Kadu1992/ai-tutor-video \
   ~/.config/opencode/skills/ai-tutor
 
 Depois abra novamente o OpenCode.
@@ -224,7 +241,7 @@ Execute:
 
 New-Item -ItemType Directory -Force "$HOME\.config\opencode\skills"
 
-git clone https://github.com/14lucas-mendes/ai-tutor-skill `
+git clone https://github.com/Kadu1992/ai-tutor-video `
   "$HOME\.config\opencode\skills\ai-tutor"
 
 O OpenCode identifica as skills disponíveis e pode carregar o AI Tutor quando seu pedido corresponde à descrição da skill.
@@ -251,7 +268,7 @@ Portanto, se você utiliza Cursor e OpenCode na mesma máquina, pode instalar o 
 
 mkdir -p ~/.agents/skills
 
-git clone https://github.com/14lucas-mendes/ai-tutor-skill \
+git clone https://github.com/Kadu1992/ai-tutor-video \
   ~/.agents/skills/ai-tutor
 
 Assim, os dois ambientes podem descobrir a mesma instalação.
@@ -662,3 +679,12 @@ O objetivo é tornar o estudo com agentes de IA mais:
 estruturado, contínuo, verificável e útil na prática.
 
 Feedback, testes e contribuições são bem-vindos.
+
+---
+
+## 📜 Créditos e Origem
+
+Este projeto é uma evolução direta do trabalho original de **[Lucas Mendes](https://github.com/14lucas-mendes/ai-tutor-skill)**, preservando integralmente sua metodologia pedagógica baseada em evidências, matriz de domínio e escada de ajuda socrática.
+
+A versão **AI Tutor Video** foi concebida e desenvolvida por **[Kadu Amstetter](https://github.com/Kadu1992)**, introduzindo a ingestão autônoma de vídeo-aulas do YouTube (`yt-tool`), checkpoints de pausa em minutos/segundos, testes automatizados e sincronização bidirecional com o catálogo central [Kadu Skills Hub](https://github.com/Kadu1992/kadu-skills-hub).
+
