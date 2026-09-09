@@ -1,0 +1,39 @@
+# ==============================================================================
+# Automação de Notificação do Hub (AI Tutor Video -> Kadu Skills Hub)
+# O que este workflow faz: Envia um sinal (evento repository_dispatch) para o
+# repositório kadu-skills-hub sempre que houver um novo push na branch main.
+# Como funciona no fluxo: Permite que a sua vitrine de skills seja atualizada
+# de forma 100% instantânea sem você precisar abrir o Hub ou sincronizar manualmente.
+# ==============================================================================
+
+name: Notificar Hub de Atualizacao
+
+on:
+  push:
+    branches:
+      - main # Dispara sempre que novas alteracoes entrarem na branch principal
+
+jobs:
+  notificar-hub:
+    name: Avisar Kadu Skills Hub
+    runs-on: ubuntu-latest
+
+    steps:
+      # Dispara a chamada de API do GitHub para acordar o robô do kadu-skills-hub
+      - name: Enviar sinal de sincronizacao para o Hub
+        run: |
+          # Verifica se o segredo HUB_SYNC_TOKEN está presente para evitar falhas silenciosas
+          if [ -z "${{ secrets.HUB_SYNC_TOKEN }}" ]; then
+            echo "Aviso: O segredo HUB_SYNC_TOKEN ainda nao foi cadastrado neste repositorio."
+            echo "A vitrine continua sendo atualizada diariamente as 09h e pelo botao manual."
+            echo "Para habilitar o disparo instantaneo no push, cadastre o token HUB_SYNC_TOKEN no GitHub."
+            exit 0
+          fi
+
+          echo "Enviando aviso de atualizacao para Kadu1992/kadu-skills-hub..."
+          curl -s -X POST \
+            -H "Accept: application/vnd.github.v3+json" \
+            -H "Authorization: token ${{ secrets.HUB_SYNC_TOKEN }}" \
+            https://api.github.com/repos/Kadu1992/kadu-skills-hub/dispatches \
+            -d '{"event_type": "sync-skills"}'
+          echo "Sinal enviado com sucesso para o Hub!"
