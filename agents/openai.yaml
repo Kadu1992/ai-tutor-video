@@ -1,4 +1,4 @@
 interface:
-  display_name: AI Tutor
-  short_description: Persistent tutoring with measurable mastery and multimodal study materials
-  default_prompt: Build or continue my evidence-based learning program and keep its state consistent.
+  display_name: AI Tutor Video
+  short_description: Persistent tutoring synchronized with video lessons, platforms, and measurable mastery
+  default_prompt: Build or continue my evidence-based learning program synchronized with video lessons and keep its state consistent.

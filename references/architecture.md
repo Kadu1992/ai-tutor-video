@@ -22,10 +22,11 @@ Initialize with `python <skill_root>/scripts/init_study.py --study-root <study_r
 ├── flashcards.md
 ├── lessons/
 ├── media/
-└── projects/
+├── projects/
+└── transcripts/
 ```
 
-Structured files are canonical. Markdown is a readable projection and carries stable IDs from structured state.
+Structured files are canonical. Markdown is a readable projection and carries stable IDs from structured state. The `transcripts/` directory stores Markdown transcripts ingested from YouTube via `yt-tool` and parsed by `scripts/parse_transcript.py`.
 
 ## Safe update protocol
 
@@ -36,6 +37,7 @@ Structured files are canonical. Markdown is a readable projection and carries st
 5. Replace canonical files atomically.
 6. Update Markdown projections.
 7. Run `python <skill_root>/scripts/validate_study.py <study_root>`.
+8. Optionally synchronize external course progress with `scripts/sync_platform.py`.
 
 Do not leave a partially updated state. If validation fails, report the exact invariant and retain the last valid revision.
 

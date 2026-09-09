@@ -1,18 +1,25 @@
 
-🎓 AI Tutor
+🎓 AI Tutor Video
 
-Transforme seu agente de IA em um tutor que acompanha seus estudos ao longo do tempo.
+Transforme seu agente de IA em um tutor que acompanha seus estudos em sincronia com vídeos e plataformas de cursos.
 
-O AI Tutor ajuda você a criar um plano de estudos, fazer lições, praticar, revisar o que esqueceu e acompanhar seu progresso.
+O **AI Tutor Video** combina o aprendizado baseado em evidências (matriz de domínio 0 a 100, escada de ajuda e Feynman) com ingestão automática de aulas do YouTube (via `yt-tool`), checkpoints de pausa em minutos/segundos e sincronização bidirecional com seu portal de cursos (`cursos-estudo`).
 
-Em vez de apenas explicar um assunto, ele tenta descobrir se você realmente consegue entender e aplicar o que aprendeu.
+Em vez de apenas explicar um assunto ou assistir passivamente a vídeos, ele sabe exatamente onde você parou, extrai os conceitos e analogias da aula e desafia você a aplicar na prática antes de avançar.
 
-O AI Tutor segue o padrão de Agent Skills e pode ser usado em diferentes ambientes, incluindo:
+Novas capacidades principais:
+- 🎬 **Ingestão Autônoma de Vídeos (`/video-sync`):** Baixa e analisa transcrições do YouTube via `yt-tool`, mapeando tópicos e trechos de código automaticamente.
+- ⏱️ **Checkpoints Granulares:** Registra o ponto exato de pausa (`paused_at: "18:20"`), lembrando na abertura da sessão exatamente de onde você parou.
+- 🔄 **Sincronização com Plataforma (`/platform-sync`):** Envia notas, playlists concluídas e status diretamente para o banco SQLite do portal `cursos-estudo`.
+- 🛡️ **Rigor Pedagógico Inviolável:** Preserva 100% da matriz de domínio e escada de ajuda — você só avança demonstrando evidências autônomas.
+
+O AI Tutor Video segue o padrão de Agent Skills e pode ser usado em diferentes ambientes, incluindo:
 
 - OpenAI Codex
 - Claude Code
 - Cursor
 - OpenCode
+- Google Antigravity IDE
 
 ---
 

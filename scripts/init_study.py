@@ -77,7 +77,17 @@ def initialize_study(
     study_id = f"study_{uuid.uuid4()}"
     created: list[Path] = []
 
-    for directory in (metadata_root, study_root / "lessons", study_root / "media", study_root / "projects"):
+    # Campos opcionais para integração com cursos em vídeo e plataformas web
+    optional_keys = ("course_id", "playlist_url", "platform_api_url")
+
+    # Criação das pastas estruturais do estudo, incluindo transcripts para aulas do YouTube
+    for directory in (
+        metadata_root,
+        study_root / "lessons",
+        study_root / "media",
+        study_root / "projects",
+        study_root / "transcripts",
+    ):
         directory.mkdir(parents=True, exist_ok=True)
 
     payloads: dict[str, dict] = {}
@@ -89,6 +99,9 @@ def initialize_study(
     study_config = payloads["study-config.json"]
     for key in REQUIRED_CONFIG:
         study_config[key] = deepcopy(config[key])
+    for key in optional_keys:
+        if key in config:
+            study_config[key] = deepcopy(config[key])
     study_config["external_consents"] = deepcopy(config.get("external_consents", {}))
 
     for name, payload in payloads.items():

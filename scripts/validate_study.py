@@ -139,6 +139,58 @@ def _validate_cross_references(state: dict, indexes: dict[str, set[str]]) -> lis
     return errors
 
 
+# ==============================================================================
+# Função: _validate_video_tracking
+# O que esta parte faz: Valida os metadados de vídeo (video_metadata) e checkpoints em lições e tópicos.
+# Para que serve / Como funciona no fluxo: Garante a integridade das aulas sincronizadas
+# com o YouTube, impedindo que uma lição seja dada como concluída se ainda existirem
+# conceitos pendentes de estudo e evidência no vídeo pausado.
+# ==============================================================================
+def _validate_video_tracking(state: dict, indexes: dict[str, set[str]]) -> list[str]:
+    errors: list[str] = []
+
+    # Validação de entidades de vídeo vinculadas a lições
+    for lesson in state.get("lessons", []):
+        video = lesson.get("video_metadata")
+        if video is None:
+            continue
+        if not isinstance(video, dict):
+            errors.append(f"lesson video_metadata must be a dictionary: {lesson.get('lesson_id')}")
+            continue
+
+        checkpoint = video.get("checkpoint")
+        if checkpoint is None:
+            continue
+        if not isinstance(checkpoint, dict):
+            errors.append(f"checkpoint must be a dictionary: {lesson.get('lesson_id')}")
+            continue
+
+        paused_at = checkpoint.get("paused_at")
+        paused_at_seconds = checkpoint.get("paused_at_seconds")
+        if paused_at is not None and not isinstance(paused_at, str):
+            errors.append(f"checkpoint paused_at must be a string: {lesson.get('lesson_id')}")
+        if paused_at_seconds is not None and (not isinstance(paused_at_seconds, (int, float)) or paused_at_seconds < 0):
+            errors.append(f"checkpoint paused_at_seconds must be a non-negative number: {lesson.get('lesson_id')}")
+
+        concepts_pending = checkpoint.get("concepts_pending", [])
+        if not isinstance(concepts_pending, list):
+            errors.append(f"checkpoint concepts_pending must be a list: {lesson.get('lesson_id')}")
+        elif lesson.get("status") == "completed" and paused_at and concepts_pending:
+            # Invariante: Lição com pausa e conceitos pendentes não pode ter status completed
+            errors.append(f"completed lesson cannot have pending video concepts: {lesson.get('lesson_id')}")
+
+    # Validação opcional para tópicos que referenciem vídeo diretamente
+    for topic in state.get("topics", []):
+        video = topic.get("video_metadata")
+        if video is None:
+            continue
+        if not isinstance(video, dict):
+            errors.append(f"topic video_metadata must be a dictionary: {topic.get('topic_id')}")
+            continue
+
+    return errors
+
+
 def validate_state(state: dict) -> list[str]:
     """Return deterministic errors for a state payload."""
 
@@ -152,6 +204,7 @@ def validate_state(state: dict) -> list[str]:
     errors.extend(_validate_sessions(state, indexes))
     errors.extend(_validate_mastery(state, indexes))
     errors.extend(_validate_cross_references(state, indexes))
+    errors.extend(_validate_video_tracking(state, indexes))
     return sorted(set(errors))
 
 

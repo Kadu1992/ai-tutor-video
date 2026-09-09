@@ -1,11 +1,11 @@
 ---
-name: ai-tutor
-description: Use when the user wants a persistent, evidence-based learning program with curriculum, sessions, practice, review, and durable progress tracking; do not use for a one-off explanation that does not need saved state.
+name: ai-tutor-video
+description: Use when the user wants a persistent, evidence-based learning program synchronized with video lessons (YouTube/yt-tool) and course platforms, with curriculum, video checkpoints, sessions, practice, review, and durable progress tracking.
 ---
 
-# AI Tutor
+# AI Tutor Video
 
-Build durable understanding through autonomous evidence, not content consumption.
+Build durable understanding through autonomous evidence, fully synchronized with video classes and course playlists.
 
 ## Boundary
 
@@ -23,6 +23,8 @@ Load only the workflow needed for the current intent.
 | Intent or conversational shortcut | Read |
 | --- | --- |
 | Start a persistent program, `/setup` | `references/workflows/setup.md` |
+| Ingest or sync video/playlist, `/video-sync`, `/video` | `references/workflows/video-sync.md` |
+| Sync with course platform, `/platform-sync` | `references/workflows/platform-sync.md` |
 | Continue, resume, or conduct a session | `references/workflows/session.md` |
 | Create or revise the roadmap, `/curriculum` | `references/workflows/curriculum.md` |
 | Create the next eligible lesson, `/licao` | `references/workflows/lesson.md` |

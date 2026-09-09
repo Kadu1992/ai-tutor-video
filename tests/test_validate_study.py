@@ -122,6 +122,52 @@ class ValidateStudyTests(unittest.TestCase):
         self.assertTrue(any("duplicate id" in error for error in errors), errors)
         self.assertTrue(any("unknown evidence" in error for error in errors), errors)
 
+    def test_valid_video_metadata_passes(self):
+        state = base_state()
+        state["lessons"][0]["video_metadata"] = {
+            "video_id": "vid_123",
+            "title": "Aula 01",
+            "duration": "20:00",
+            "checkpoint": {
+                "paused_at": "10:00",
+                "paused_at_seconds": 600,
+                "status": "in_progress",
+                "concepts_covered": ["intro"],
+                "concepts_pending": ["exercicio"],
+            },
+        }
+        self.assertEqual([], validate_state(state))
+
+    def test_completed_lesson_with_pending_concepts_fails(self):
+        state = base_state()
+        state["lessons"][0]["status"] = "completed"
+        state["lessons"][0]["video_metadata"] = {
+            "video_id": "vid_123",
+            "title": "Aula 01",
+            "checkpoint": {
+                "paused_at": "10:00",
+                "paused_at_seconds": 600,
+                "concepts_pending": ["conceito_pendente"],
+            },
+        }
+        errors = validate_state(state)
+        self.assertTrue(any("completed lesson cannot have pending video concepts" in err for err in errors), errors)
+
+    def test_completed_lesson_with_no_pending_concepts_passes(self):
+        state = base_state()
+        state["lessons"][0]["status"] = "completed"
+        state["lessons"][0]["video_metadata"] = {
+            "video_id": "vid_123",
+            "title": "Aula 01",
+            "checkpoint": {
+                "paused_at": "20:00",
+                "paused_at_seconds": 1200,
+                "concepts_pending": [],
+            },
+        }
+        self.assertEqual([], validate_state(state))
+
 
 if __name__ == "__main__":
     unittest.main()
+
