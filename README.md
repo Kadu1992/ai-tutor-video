@@ -9,9 +9,10 @@ Em vez de apenas explicar um assunto ou assistir passivamente a vídeos, ele sab
 
 Novas capacidades principais:
 - 🎬 **Ingestão Autônoma de Vídeos (`/video-sync`):** Baixa e analisa transcrições do YouTube via `yt-tool`, mapeando tópicos e trechos de código automaticamente.
-- ⏱️ **Checkpoints Granulares:** Registra o ponto exato de pausa (`paused_at: "18:20"`), lembrando na abertura da sessão exatamente de onde você parou.
-- 🔄 **Sincronização com Plataforma (`/platform-sync`):** Envia notas, playlists concluídas e status diretamente para o banco SQLite do portal `cursos-estudo`.
-- 🛡️ **Rigor Pedagógico Inviolável:** Preserva 100% da matriz de domínio e escada de ajuda — você só avança demonstrando evidências autônomas.
+- ⏱️ **Checkpoints Granulares:** Registra o ponto exato de pausa (`paused_at: "18:20"`, `paused_at_seconds: 1100`), permitindo links clicáveis no YouTube com `&t=...s` e lembrando na abertura da sessão exatamente de onde você parou.
+- 🔄 **Sincronização Nativa com SQLite (`pythonway.db`):** Comunicação direta, atômica e instantânea com o banco de dados do portal `cursos-estudo`, sem depender de servidor web aberto.
+- 🔌 **Resiliência a Quedas (Crash Recovery):** Persistência turno a turno que garante retomada no segundo exato caso o computador desligue de repente ou a sessão seja interrompida.
+- 🛡️ **Rigor Pedagógico Inviolável:** Preserva 100% da matriz de domínio, escada de ajuda e técnica de Feynman — você só avança demonstrando evidências autônomas.
 
 O AI Tutor Video segue o padrão de Agent Skills e pode ser usado em diferentes ambientes, incluindo:
 
@@ -343,13 +344,16 @@ O AI Tutor reconhece algumas intenções específicas:
 
 Comando| Para que serve
 "/setup"| Criar um novo programa de estudos
-"/curriculum"| Ver ou ajustar seu plano
-"/licao"| Fazer a próxima lição
-"/review"| Revisar pontos fracos
-"/feynman"| Testar se você realmente consegue explicar algo
+"/video-sync"| Ingerir aula ou playlist do YouTube via yt-tool e mapear conceitos
+"/platform-sync"| Sincronizar manualmente com o banco SQLite / portal de cursos
+"/session"| Continuar, retomar ou conduzir uma sessão de estudo
+"/curriculum"| Ver ou ajustar seu plano de estudos
+"/licao"| Fazer a próxima lição ancorada no conteúdo do vídeo
+"/review"| Revisar pontos fracos e repetições espaçadas
+"/feynman"| Testar se você consegue explicar o conceito com suas próprias palavras
 "/flashcards"| Criar ou revisar flashcards
-"/progress"| Ver seu progresso
-"/sources"| Procurar boas fontes de estudo
+"/progress"| Ver seu progresso medido na matriz de domínio
+"/sources"| Procurar e registrar boas fontes de estudo
 "/media"| Criar materiais visuais ou multimídia
 
 «Esses atalhos representam intenções do AI Tutor. Dependendo do ambiente, você pode digitá-los diretamente ou simplesmente pedir a mesma coisa em linguagem natural.»
@@ -364,11 +368,34 @@ tem a mesma intenção de:
 
 Outro exemplo:
 
-Quero revisar os assuntos em que estou tendo mais dificuldade.
+Quero sincronizar com a plataforma.
 
 tem a mesma intenção de:
 
-/review
+/platform-sync
+
+---
+
+🔌 Sincronização Local com SQLite & Resiliência a Quedas
+
+### Sincronização Direta com o Portal de Cursos (`pythonway.db`)
+O AI Tutor Video sincroniza o seu progresso diretamente com o banco de dados SQLite local (`pythonway.db`), com independência total de rede:
+- **Zero Servidores Ligados:** Você não precisa rodar servidores HTTP ou manter terminais abertos enquanto estuda. A gravação e a leitura no SQLite ocorrem diretamente no arquivo em microssegundos.
+- **Automático na Entrada e Saída:** Ao iniciar uma sessão (`/session`), o tutor concilia o estado do banco. Ao encerrar ou atingir novos checkpoints, ele persiste as notas pedagógicas, último vídeo assistido e playlists no SQLite. Quando você abrir o portal web mais tarde, tudo já estará atualizado!
+- **Modo Híbrido:** Caso utilize um portal web remoto, o comando suporta alternar para requisições HTTP (`--api-url http://...`).
+
+### Proteção Contra Quedas de Energia e Desligamentos (Crash Recovery)
+- **Persistência Atômica Turno a Turno:** A cada resposta sua ou desafio prático concluído, o tutor grava os dados no disco.
+- **Retomada Inteligente:** Se o computador desligar de repente, na próxima vez que você abrir a IDE e disser *"vamos continuar"*, o tutor detecta a interrupção inesperada, recupera o minuto/segundo exato do vídeo e os conceitos pendentes, garantindo que nenhum progresso seja perdido.
+
+---
+
+🧠 O que é a Técnica de Feynman no AI Tutor?
+
+Inspirada no físico e ganhador do Nobel **Richard Feynman** ("O Grande Explicador"), essa técnica defende que:
+> *"Se você não consegue explicar algo de forma simples para um leigo, você não entendeu de verdade."*
+
+Durante as aulas e revisões (`/feynman`), o tutor desafia você a explicar conceitos com suas próprias palavras, sem copiar jargões técnicos prontos. Quando você explica com clareza ou usa uma analogia própria, a evidência é registrada na matriz de domínio e o aprendizado se torna permanente.
 
 ---
 

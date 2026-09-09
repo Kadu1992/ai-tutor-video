@@ -3,11 +3,13 @@
 
 import io
 import json
+import tempfile
 import unittest
 import urllib.error
+from pathlib import Path
 from unittest.mock import MagicMock, patch
 
-from scripts.sync_platform import pull_platform, push_platform
+from scripts.sync_platform import find_sqlite_db, pull_platform, push_platform
 
 
 class SyncPlatformTests(unittest.TestCase):
@@ -74,6 +76,33 @@ class SyncPlatformTests(unittest.TestCase):
         self.assertFalse(result["success"])
         self.assertIsNotNone(result.get("warning"))
         self.assertIn("offline ou inacessível", result["warning"])
+
+    def test_sqlite_direct_push_and_pull(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            test_db = Path(tmpdir) / "test_pythonway.db"
+            payload = {
+                "course_id": "curso-em-video",
+                "status": "in-progress",
+                "notes": "Anotação do tutor gravada no SQLite",
+                "lastWatched": "Aula 01 - Objetos (18:20)",
+                "completedPlaylists": [0, 1],
+            }
+
+            # Testar gravação direta no SQLite
+            push_res = push_platform(payload, db_path=test_db)
+            self.assertTrue(push_res["connected"])
+            self.assertTrue(push_res["success"])
+            self.assertEqual(push_res["source"], "sqlite")
+
+            # Testar leitura direta do SQLite
+            pull_res = pull_platform(course_id="curso-em-video", db_path=test_db)
+            self.assertTrue(pull_res["connected"])
+            self.assertEqual(pull_res["source"], "sqlite")
+            self.assertIsNotNone(pull_res["progress"])
+            self.assertEqual(pull_res["progress"]["course_id"], "curso-em-video")
+            self.assertEqual(pull_res["progress"]["status"], "in-progress")
+            self.assertEqual(pull_res["progress"]["completedPlaylists"], [0, 1])
+            self.assertEqual(pull_res["progress"]["lastWatched"], "Aula 01 - Objetos (18:20)")
 
 
 if __name__ == "__main__":
