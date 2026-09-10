@@ -8,11 +8,18 @@ extraindo metadados, marcações temporais (timestamps), tópicos e blocos de c�
 from __future__ import annotations
 
 import argparse
+import io
 import json
 import re
 import sys
 from pathlib import Path
 from typing import Any
+
+# Forçar saída UTF-8 no Windows para evitar falhas com caracteres especiais e notas musicais
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+if hasattr(sys.stderr, "reconfigure"):
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
 
 
 # Expressões regulares para captura de metadados no cabeçalho do Markdown

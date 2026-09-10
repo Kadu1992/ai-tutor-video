@@ -4,11 +4,17 @@ Use when the user invokes `/video-sync`, `/video`, provides a YouTube link or vi
 
 Read `references/architecture.md`, `references/state-contract.md`, and `references/learning-contract.md`.
 
-## 1. Transcript ingestion via yt-tool
+## 1. Transcript ingestion (Universal: yt-tool or autonomous fetch)
 
-1. Run the terminal command:
-   `yt-tool transcript "<URL_or_ID>"`
-2. Verify the generated transcript Markdown in the `transcripts/` directory (`transcripts/<id>_<slug>.md`). Ensure the file is preserved in `<study_root>/transcripts/`.
+1. Check if `yt-tool` is available in the user's terminal environment:
+   - **If `yt-tool` is available**:
+     Run: `yt-tool transcript "<URL_or_ID>"`
+     Preserve the generated Markdown in `<study_root>/transcripts/<id>_<slug>.md`.
+   - **If `yt-tool` is not installed** (external users, new machines, or hub installs):
+     Execute the autonomous embedded script:
+     `python <skill_root>/scripts/fetch_transcript.py "<URL_or_ID>" --output transcripts/<id>_<slug>.md`
+     *(Note: `fetch_transcript.py` automatically validates and installs `youtube-transcript-api` via pip on demand if missing).*
+2. Ensure the transcript file is preserved in `<study_root>/transcripts/`.
 
 ## 2. Transcript parsing
 

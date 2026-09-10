@@ -3,12 +3,12 @@
 
 Transforme seu agente de IA em um tutor que acompanha seus estudos em sincronia com vídeos e plataformas de cursos.
 
-O **AI Tutor Video** combina o aprendizado baseado em evidências (matriz de domínio 0 a 100, escada de ajuda e Feynman) com ingestão automática de aulas do YouTube (via `yt-tool`), checkpoints de pausa em minutos/segundos e sincronização bidirecional com seu portal de cursos (`cursos-estudo`).
+O **AI Tutor Video** combina o aprendizado baseado em evidências (matriz de domínio 0 a 100, escada de ajuda e Feynman) com ingestão automática de aulas do YouTube (via `yt-tool` nativo ou motor embutido universal com auto-instalação `fetch_transcript.py`), checkpoints de pausa em minutos/segundos e sincronização bidirecional com seu portal de cursos (`cursos-estudo`).
 
 Em vez de apenas explicar um assunto ou assistir passivamente a vídeos, ele sabe exatamente onde você parou, extrai os conceitos e analogias da aula e desafia você a aplicar na prática antes de avançar.
 
 Novas capacidades principais:
-- 🎬 **Ingestão Autônoma de Vídeos (`/video-sync`):** Baixa e analisa transcrições do YouTube via `yt-tool`, mapeando tópicos e trechos de código automaticamente.
+- 🎬 **Ingestão Autônoma de Vídeos (`/video-sync`):** Baixa e analisa transcrições do YouTube de forma universal. Se o sistema tiver `yt-tool` ele aproveita nativamente; se não tiver, utiliza o extrator embutido `fetch_transcript.py` com instalação silenciosa e sob demanda de dependências.
 - ⏱️ **Checkpoints Granulares:** Registra o ponto exato de pausa (`paused_at: "18:20"`, `paused_at_seconds: 1100`), permitindo links clicáveis no YouTube com `&t=...s` e lembrando na abertura da sessão exatamente de onde você parou.
 - 🔄 **Sincronização Nativa com SQLite (`pythonway.db`):** Comunicação direta, atômica e instantânea com o banco de dados do portal `cursos-estudo`, sem depender de servidor web aberto.
 - 🔌 **Resiliência a Quedas (Crash Recovery):** Persistência turno a turno que garante retomada no segundo exato caso o computador desligue de repente ou a sessão seja interrompida.
@@ -383,6 +383,12 @@ O AI Tutor Video sincroniza o seu progresso diretamente com o banco de dados SQL
 - **Zero Servidores Ligados:** Você não precisa rodar servidores HTTP ou manter terminais abertos enquanto estuda. A gravação e a leitura no SQLite ocorrem diretamente no arquivo em microssegundos.
 - **Automático na Entrada e Saída:** Ao iniciar uma sessão (`/session`), o tutor concilia o estado do banco. Ao encerrar ou atingir novos checkpoints, ele persiste as notas pedagógicas, último vídeo assistido e playlists no SQLite. Quando você abrir o portal web mais tarde, tudo já estará atualizado!
 - **Modo Híbrido:** Caso utilize um portal web remoto, o comando suporta alternar para requisições HTTP (`--api-url http://...`).
+
+> 💡 **Nota Importante: O uso de SQLite e de interface visual é 100% opcional!**
+> - **Modo Padrão (Leve & Autônomo):** Se você só quer estudar no seu editor de código com a IA, não precisa configurar nada. Todo o seu histórico e checkpoints são salvos diretamente em arquivos Markdown e JSON locais (`.ai-tutor/state.json`).
+> - **Quer um portal visual com dashboard?** Você não precisa programar nada na mão. Basta pedir diretamente para o seu agente de IA no chat:
+>   > *"Crie para mim uma interface web/portal com dashboard em HTML/CSS/JavaScript para acompanhar meu progresso do AI Tutor Video e sincronize com o SQLite local!"*  
+>   A própria IA pode gerar a interface web no seu projeto e conectá-la nativamente ao banco `pythonway.db` e ao `scripts/sync_platform.py`, entregando uma plataforma visual completa sob medida para você!
 
 ### Proteção Contra Quedas de Energia e Desligamentos (Crash Recovery)
 - **Persistência Atômica Turno a Turno:** A cada resposta sua ou desafio prático concluído, o tutor grava os dados no disco.
