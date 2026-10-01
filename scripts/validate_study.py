@@ -5,7 +5,12 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
+
+_skill_root = Path(__file__).resolve().parents[1]
+if str(_skill_root) not in sys.path:
+    sys.path.insert(0, str(_skill_root))
 
 from scripts.create_learning_pack import validate_media_item
 
