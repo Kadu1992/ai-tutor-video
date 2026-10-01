@@ -4,6 +4,8 @@ Read and validate canonical state before the first learning question.
 
 ## Resume
 
+Ensure the study root layout (`.ai-tutor/`, `curriculum.md`, `session-log.md`, `flashcards.md`, `lessons/`, `projects/`, `transcripts/`, `media/`) exists on disk. If missing, automatically initialize using `scripts/init_study.py` before asking the first question.
+
 Resume the latest `in_progress` session. If none exists, resume the latest `interrupted` session whose `resumable` field is true by adding the `resumed` transition. Recover its checkpoint, lesson IDs, weak points, and next action. Open a new session only when no resumable work exists.
 
 Reconcile local canonical state with the local course platform database (`pythonway.db` via `python <skill_root>/scripts/sync_platform.py --action pull`). If changes were made on the web portal (such as marking completed playlists or updating notes), reflect them into the study state before beginning the session.
@@ -19,7 +21,7 @@ For video-anchored lessons, inspect `video_metadata.checkpoint` (`paused_at`, `p
 1. Confirm one prerequisite with one question.
 2. Set one observable session objective.
 3. Teach one idea from concrete to abstract, anchoring explanations and analogies in the video lesson when available.
-4. Request an autonomous explanation or application (never give solutions upfront; require student implementation in the IDE).
+4. Request an autonomous explanation or application (never give solutions upfront; require student implementation in the IDE by writing or editing Python scripts inside `projects/` and running them in the terminal).
 5. Apply the help ladder without counting guided work as independent evidence.
 6. Record evidence, retention, weak points, cards, and next focus under the normative contracts.
 

@@ -37,9 +37,22 @@ Structured files are canonical. Markdown is a readable projection and carries st
 5. Replace canonical files atomically.
 6. Update Markdown projections.
 7. Run `python <skill_root>/scripts/validate_study.py <study_root>`.
-8. Optionally synchronize external course progress with `scripts/sync_platform.py`.
+## Dual storage architecture (IDE + Web Cockpit SQLite)
 
-Do not leave a partially updated state. If validation fails, report the exact invariant and retain the last valid revision.
+The AI Tutor Video operates on a synchronized dual storage pattern:
+
+1. **IDE Workspace (`study_root`)**:
+   - Holds 100% of the evidence-based study artifacts derived from the Lucas Mendes pedagogical model.
+   - The student actively writes and runs executable Python code inside `projects/` (e.g. `projects/<topic-slug>/<script>.py`).
+   - Lesson guides are generated under `lessons/<sequence>-<slug>.md`.
+   - Active recall questions live in `flashcards.md`, the progressive roadmap in `curriculum.md`, and session logs in `session-log.md`.
+   - Transcripts ingested from YouTube via `yt-tool` reside in `transcripts/`.
+   - If the study directory layout is missing when a session or course starts, invoke `scripts/init_study.py` immediately to create all directories and baseline files.
+
+2. **Relational Database & Web Cockpit (`pythonway.db`)**:
+   - Stores course progress in the `user_progress` table (`status`, `notes`, `last_watched`, `completed_playlists`).
+   - The web frontend/portal reads directly from SQLite to render visual dashboards, badges, and playlist checklists.
+   - Sincronização bidirecional occurs seamlessly via `scripts/sync_platform.py` (`--action pull` at session start, `--action push` at session close/checkpoints).
 
 ## Portability
 
