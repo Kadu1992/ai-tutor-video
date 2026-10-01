@@ -10,8 +10,10 @@ Initialize with `python <skill_root>/scripts/init_study.py --study-root <study_r
 
 ## Study layout
 
+When initializing in a project workspace, all study files are encapsulated in a single `ai-tutor/` directory:
+
 ```text
-<study_root>/
+<workspace>/ai-tutor/
 ├── .ai-tutor/
 │   ├── study-config.json
 │   ├── state.json
@@ -26,7 +28,7 @@ Initialize with `python <skill_root>/scripts/init_study.py --study-root <study_r
 └── transcripts/
 ```
 
-Structured files are canonical. Markdown is a readable projection and carries stable IDs from structured state. The `transcripts/` directory stores Markdown transcripts ingested from YouTube via `yt-tool` and parsed by `scripts/parse_transcript.py`.
+Structured files are canonical. Markdown is a readable projection and carries stable IDs from structured state. The `transcripts/` directory stores Markdown transcripts ingested from YouTube via `yt-tool` and parsed by `scripts/parse_transcript.py`. All study artifacts live together inside `ai-tutor/`, preventing any clutter in the root of the user's workspace.
 
 ## Safe update protocol
 

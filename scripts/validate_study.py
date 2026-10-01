@@ -214,7 +214,11 @@ def validate_state(state: dict) -> list[str]:
 
 
 def validate_study(study_root: Path) -> list[str]:
-    metadata = study_root.resolve() / ".ai-tutor"
+    study_root = study_root.resolve()
+    if not (study_root / ".ai-tutor").is_dir() and (study_root / "ai-tutor" / ".ai-tutor").is_dir():
+        study_root = study_root / "ai-tutor"
+
+    metadata = study_root / ".ai-tutor"
     errors: list[str] = []
     for name in ("study-config.json", "state.json", "media-index.json"):
         if not (metadata / name).is_file():

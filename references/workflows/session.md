@@ -4,7 +4,7 @@ Read and validate canonical state before the first learning question.
 
 ## Resume
 
-Ensure the study root layout (`.ai-tutor/`, `curriculum.md`, `session-log.md`, `flashcards.md`, `lessons/`, `projects/`, `transcripts/`, `media/`) exists on disk. If missing, automatically initialize using `scripts/init_study.py` before asking the first question.
+Ensure the study root layout (`ai-tutor/` containing `.ai-tutor/`, `curriculum.md`, `session-log.md`, `flashcards.md`, `lessons/`, `projects/`, `transcripts/`, `media/`) exists on disk. If missing, automatically initialize using `scripts/init_study.py` before asking the first question.
 
 Resume the latest `in_progress` session. If none exists, resume the latest `interrupted` session whose `resumable` field is true by adding the `resumed` transition. Recover its checkpoint, lesson IDs, weak points, and next action. Open a new session only when no resumable work exists.
 

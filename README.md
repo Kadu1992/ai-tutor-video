@@ -302,22 +302,23 @@ Depois disso, ele cria seu plano inicial.
 
 ### 📁 O que o AI Tutor Video cria na sua pasta de estudos (Estrutura Dual Storage)
 
-Quando você inicia seu estudo, o AI Tutor Video gera automaticamente no diretório do seu projeto toda a estrutura de aprendizado do modelo original do Lucas Mendes, adicionando a camada de vídeo e persistência relacional:
+Quando você inicia seu estudo, o AI Tutor Video gera automaticamente no diretório do seu projeto uma pasta dedicada e visível chamada `ai-tutor/`, encapsulando toda a estrutura de aprendizado do modelo original do Lucas Mendes, adicionando a camada de vídeo e persistência relacional:
 
 ```text
-<sua-pasta-de-estudos>/
-├── .ai-tutor/           # Metadados e estado canônico (study-config.json, state.json)
-├── curriculum.md        # Mapa de tópicos com os níveis de domínio (0% a 100%)
-├── session-log.md       # Histórico cronológico das sessões de estudo com checkpoints
-├── flashcards.md        # Cartões de repetição espaçada gerados a partir das aulas
-├── lessons/             # Lições detalhadas geradas pelo tutor
-├── projects/            # Onde VOCÊ programa os scripts e resolve os desafios práticos
-├── media/               # Diagramas, mapas conceituais e ilustrações pedagógicas
-└── transcripts/         # Transcrições completas das videoaulas (via yt-tool / YouTube)
+<seu-projeto>/
+└── ai-tutor/            # Pasta única de estudos (mantém a raiz do seu projeto 100% limpa)
+    ├── .ai-tutor/       # Metadados e estado canônico (study-config.json, state.json)
+    ├── curriculum.md    # Mapa de tópicos com os níveis de domínio (0% a 100%)
+    ├── session-log.md   # Histórico cronológico das sessões de estudo com checkpoints
+    ├── flashcards.md    # Cartões de repetição espaçada gerados a partir das aulas
+    ├── lessons/         # Lições detalhadas geradas pelo tutor
+    ├── projects/        # Onde VOCÊ programa os scripts e resolve os desafios práticos
+    ├── media/           # Diagramas, mapas conceituais e ilustrações pedagógicas
+    └── transcripts/     # Transcrições completas das videoaulas (via yt-tool / YouTube)
 ```
 
 **Dual Storage Sincronizado (IDE + Painel Web SQLite):**
-1. **Na IDE**: Você escreve código real na pasta `projects/`, roda no terminal, responde perguntas conceituais Feynman e revisa flashcards.
+1. **Na IDE (`ai-tutor/`)**: Você escreve código real na pasta `ai-tutor/projects/`, roda no terminal, responde perguntas conceituais Feynman e revisa flashcards.
 2. **No Banco SQLite (`pythonway.db`) / Painel Web**: O progresso (status, notas, último vídeo assistido, playlists concluídas) é sincronizado automaticamente via `scripts/sync_platform.py` para alimentar o cockpit visual no navegador.
 
 ---

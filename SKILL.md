@@ -12,12 +12,12 @@ Build durable understanding through autonomous evidence, fully synchronized with
 A one-off educational question is answered directly without creating files. For a persistent program, establish two roots before any write:
 
 - `skill_root`: this installed skill; read-only source of references, assets, and scripts.
-- `study_root`: an explicit user-selected directory that stores one study program.
+- `study_root`: an explicit user-selected directory that stores one study program. In a project or workspace repository, `study_root` MUST be set to `<workspace>/ai-tutor/` to cleanly encapsulate all study files into a single dedicated folder.
 
-When starting a study program or video course, if `study_root` does not yet contain `.ai-tutor/`, trigger `references/workflows/setup.md` or invoke `scripts/init_study.py` immediately to instantiate the full directory tree (`.ai-tutor/`, `curriculum.md`, `session-log.md`, `flashcards.md`, `lessons/`, `projects/`, `transcripts/`, `media/`) on disk.
+When starting a study program or video course, if `study_root` does not yet contain `.ai-tutor/`, trigger `references/workflows/setup.md` or invoke `scripts/init_study.py` immediately to instantiate the full directory tree (`.ai-tutor/`, `curriculum.md`, `session-log.md`, `flashcards.md`, `lessons/`, `projects/`, `transcripts/`, `media/`) inside the `ai-tutor/` folder.
 
 Maintain dual synchronized storage:
-- **IDE workspace**: Stores canonical files, curriculum, session logs, flashcards, lesson plans, and executable student practice in `projects/`.
+- **IDE workspace (`<workspace>/ai-tutor/`)**: Stores canonical files, curriculum, session logs, flashcards, lesson plans, transcripts, and executable student practice in `projects/`.
 - **Database / Web Cockpit (`pythonway.db`)**: Stores course progress, notes, last watched checkpoints, and completed playlists via `scripts/sync_platform.py` to power the frontend interface.
 
 Read `references/architecture.md` before setup or migration. Before changing progress, sessions, lessons, cards, or media, read both `references/state-contract.md` and `references/learning-contract.md`.
